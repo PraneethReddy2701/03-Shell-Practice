@@ -11,8 +11,6 @@ SCRIPT_NAME="$(echo $0 | cut -d "." -f1)"
 LOG_FILE="$LOG_FOLDER/$SCRIPT_NAME.log"
 PACKAGES=("mysql" "python3" "nginx" "httpd")
 
-mkdir -p $LOGS_FOLDER
-
 echo "Script started running at : $(date)"
 
 if [ $USERID -ne 0]
@@ -22,6 +20,8 @@ then
 else    
     echo " You are running the script with root access "
 fi
+
+mkdir -p $LOGS_FOLDER
 
 VALIDATE ()
 {
