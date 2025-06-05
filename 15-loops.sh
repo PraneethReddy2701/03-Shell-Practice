@@ -9,7 +9,7 @@ N="\e[0m"
 LOGS_FOLDER="/var/log/shellscript-logs"
 SCRIPT_NAME="$(echo $0 | cut -d "." -f1)"
 LOG_FILE="$LOG_FOLDER/$SCRIPT_NAME.log"
-PACKAGES=("mysql" "python3" "nginx" "httpd")
+PACKAGES=( "mysql" "python3" "nginx" "httpd" )
 
 if [ $USERID -ne 0 ]
 then
@@ -34,7 +34,7 @@ VALIDATE ()
     fi
 }
 
-for package in ${PACKAGES(@)}
+for package in ${PACKAGES[@]}
 do
     dnf list installed $package
     if [ $? -ne 0 ]
