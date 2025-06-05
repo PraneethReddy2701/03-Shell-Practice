@@ -17,7 +17,7 @@ else
     echo "You are running with root access" | tee -a $LOG_FILE
 fi
 
-mkdir -p LOGS_FOLDER  # -p (if folder is already present it skips or else it will create the folder)
+mkdir -p $LOGS_FOLDER  # -p (if folder is already present it skips or else it will create the folder)
 echo "Script started executing at : $(date)" | tee -a $LOG_FILE
 
 VALIDATE()
@@ -31,31 +31,31 @@ VALIDATE()
     fi
 }
 
-dnf list installed mysql | &>>$LOG_FILE
+dnf list installed mysql  &>>$LOG_FILE
 if [ $? -ne 0 ]
 then
     echo "Mysql is not installed.. going to install it" | tee -a $LOG_FILE
-    dnf install mysql -y | &>>$LOG_FILE
+    dnf install mysql -y  &>>$LOG_FILE
     VALIDATE $? "mysql"
 else
     echo -e "Mysql is already installed.. $Y So SKIPPING $N " | tee -a $LOG_FILE
 fi
 
-dnf list installed python3 | &>>$LOG_FILE
+dnf list installed python3  &>>$LOG_FILE
 if [ $? -ne 0 ]
 then
     echo "Python3 is not installed.. going to install" | tee -a $LOG_FILE
-    dnf install python3 -y | &>>$LOG_FILE
+    dnf install python3 -y  &>>$LOG_FILE
     VALIDATE $? "python3"
 else
     echo "Python3 is already installed.. $Y So SKIPPING $N " | tee -a $LOG_FILE
 fi
 
-dnf list installed nginx | &>>LOG_FILE
+dnf list installed nginx  &>>LOG_FILE
 if [ $? -ne 0 ]
 then 
     echo "Nginx is not installed .. going to install it" | tee -a $LOG_FILE
-    dnf install nginx -y | &>>LOG_FILE
+    dnf install nginx -y  &>>LOG_FILE
     VALIDATE $? "nginx"
 else
     echo "Nginx is already installed.. $Y So SKIPPING $N " | tee -a $LOG_FILE
