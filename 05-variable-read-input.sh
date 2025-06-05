@@ -1,5 +1,6 @@
 #!/bin/bash
 
-read PIN
+read -m PIN
+
 
 echo "pin is : $PIN"
