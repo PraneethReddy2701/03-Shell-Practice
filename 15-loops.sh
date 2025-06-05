@@ -11,15 +11,15 @@ SCRIPT_NAME="$(echo $0 | cut -d "." -f1)"
 LOG_FILE="$LOG_FOLDER/$SCRIPT_NAME.log"
 PACKAGES=("mysql" "python3" "nginx" "httpd")
 
-echo "Script started running at : $(date)"
-
-if [ $USERID -ne 0]
+if [ $USERID -ne 0 ]
 then
     echo -e "$R Error : Please run this script with root access $N"
     exit 1
 else    
     echo " You are running the script with root access "
 fi
+
+echo "Script started running at : $(date)"
 
 mkdir -p $LOGS_FOLDER
 
@@ -34,7 +34,7 @@ VALIDATE ()
     fi
 }
 
-for package in {PACKAGES(@)}
+for package in ${PACKAGES(@)}
 do
     dnf list installed $package
     if [ $? -ne 0 ]
