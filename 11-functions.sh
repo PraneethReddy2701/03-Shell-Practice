@@ -26,7 +26,7 @@ if [ $? -ne 0 ]
 then 
     echo "Mysql is not installed.. going to install"
     dnf install msql -y
-    VALIDATE()
+    VALIDATE $? "mysql"
 else
     echo "Mysql is installed.. So SKIPPING"
 fi
@@ -36,7 +36,7 @@ if [ $? -ne 0 ]
 then 
     echo "Python is not installed.. going to install"
     dnf install python3 -y
-    VALIDATE()
+    VALIDATE $? "python3"
 else
     echo "Python3 is installed.. So SKIPPING"
 fi
@@ -46,7 +46,7 @@ if [ $? -ne 0 ]
 then
     echo "Nginx is not installed..Going to install"
     dnf install nginx -y
-    VALIDATE()
+    VALIDATE $? "nginx"
 else
 echo "Nginx is already installed.. SO SKIPPING"
     
