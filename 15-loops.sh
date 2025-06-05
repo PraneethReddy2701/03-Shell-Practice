@@ -13,13 +13,13 @@ PACKAGES=( "mysql" "python3" "nginx" "httpd" )
 
 if [ $USERID -ne 0 ]
 then
-    echo -e "$R Error : Please run this script with root access $N" | tee -a $LOGS_FILE
+    echo -e "$R Error : Please run this script with root access $N" | tee -a $LOG_FILE
     exit 1
 else    
-    echo " You are running the script with root access " | tee -a $LOGS_FILE
+    echo " You are running the script with root access " | tee -a $LOG_FILE
 fi
 
-echo "Script started running at : $(date)" | tee -a $LOGS_FILE
+echo "Script started running at : $(date)" | tee -a $LOG_FILE
 
 mkdir -p $LOGS_FOLDER
 
@@ -27,22 +27,22 @@ VALIDATE ()
 {
     if [ $1 -eq 0 ]
     then
-        echo -e "Installing $2 is $G SUCCESS $N" | tee -a $LOGS_FILE
+        echo -e "Installing $2 is $G SUCCESS $N" | tee -a $LOG_FILE
     else
-        echo -e "Installing $2 is $R FAILURE $N" | tee -a $LOGS_FILE
+        echo -e "Installing $2 is $R FAILURE $N" | tee -a $LOG_FILE
         exit 1
     fi
 }
 
 for package in ${PACKAGES[@]}
 do
-    dnf list installed $package &>>$LOGS_FILE
+    dnf list installed $package &>>$LOG_FILE
     if [ $? -ne 0 ]
     then
-        echo "$package is not installed.. going to install" | tee -a $LOGS_FILE
-        dnf install $package -y &>>$LOGS_FILE
+        echo "$package is not installed.. going to install" | tee -a $LOG_FILE
+        dnf install $package -y &>>$LOG_FILE
         VALIDATE $? "$package"
     else
-        echo -e "$Y $package is already installed.. Nothing to do $N" | tee -a $LOGS_FILE
+        echo -e "$Y $package is already installed.. Nothing to do $N" | tee -a $LOG_FILE
     fi
 done
