@@ -11,7 +11,7 @@ then
     echo -e "$R Error: Run the script with root access $N"
     exit 1
 else
-    echo -e "You are running with root access"
+    echo "You are running with root access"
 fi
 
 VALIDATE()
@@ -28,7 +28,8 @@ VALIDATE()
 dnf list installed mysql
 if [ $? -ne 0 ]
 then
-    dnf install mysql
+    echo "Mysql is not installed.. going to install"
+    dnf install mysql -y
     VALIDATE $? "mysql"
 else
     echo -e "Mysql is already installed.. $Y So SKIPPING $N "
@@ -37,7 +38,8 @@ fi
 dnf list installed python3
 if [ $? -ne 0 ]
 then
-    dnf install python3
+    echo "Python3 is not installed.. Going to install"
+    dnf install python3 -y
     VALIDATE $? "python3"
 else
     echo -e "Python3 is alreaddy installed.. $Y SO SKIPPING $N "
@@ -46,7 +48,8 @@ fi
 dnf list installed nginx
 if [ $? -ne 0 ]
 then 
-    dnf install nginx
+    echo "Nginx is not installed.. Going to install it"
+    dnf install nginx -y
     VALIDATE $? "nginx"
 else
     echo -e " Nginx is already installed.. $Y So SKIPPING $N "
