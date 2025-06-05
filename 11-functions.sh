@@ -48,5 +48,6 @@ then
     dnf install nginx -y
     VALIDATE $? "nginx"
 else
-echo "Nginx is already installed.. SO SKIPPING"
+    echo "Nginx is already installed.. SO SKIPPING"
+fi
     
