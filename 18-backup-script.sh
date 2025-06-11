@@ -35,6 +35,7 @@ then
     TIMESTAMP=$(date +%F-%H-%M-%S)
     ZIP_FILE="$DESTINATION_DIR/app-logs-$TIMESTAMP.zip"
     find $SOURCE_DIR -name "*.log" -mtime +$DAYS | zip -@ "$ZIP_FILE"
+    
     if [ -f $ZIP_FILE ]
     then
         echo "Successfully created zip file"
