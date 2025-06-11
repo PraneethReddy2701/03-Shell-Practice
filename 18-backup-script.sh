@@ -2,7 +2,7 @@
 
 SOURCE_DIR=$1
 DESTINATION_DIR=$2
-DAYS=$(3:-14)
+DAYS=${3:-14}
 
 if [ $# -lt 2 ]
 then
@@ -47,6 +47,7 @@ then
      else
         echo -e "Zip file creation...$R FAILURE $N"
         exit 1
+    fi
 else
     echo -e "No logs files older than 14 days... $Y SO SKIPPING $N"
 fi
