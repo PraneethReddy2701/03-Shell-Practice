@@ -5,35 +5,28 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
-# it prints the total content in the file (which we give as argument)
-cat "$1" | \ 
+# cat "$1" ; it prints the total content in the file (which we give as argument)
 
-# tr replaces punctuations and spaces with new lines; -s removes repeated punctutation/space
-tr -s '[:punct:]' '[:space]' | \ 
+# tr -s '[:punct:]' '[:space]' ; tr replaces punctuations and spaces with new lines; -s removes repeated punctutation/space
 
-# converts all the words to lower
-tr '[:upper:]' '[:lower:]' | \ 
+# tr '[:upper:]' '[:lower:]' ; converts all the words to lower
 
-# doesnot includes empty lines in the next input
-grep -v '^$' | \ 
+# grep -v '^$'; doesnot includes empty lines in the next input 
 
-#sort the list of word alphabetically
-sort | \ 
+# sort ; sort the list of word alphabetically
 
-# count how many times the word occured
-uniq -c | \ 
+# uniq -c ; count how many times the word occured
 
-# sort (n) numerically (r) in reverse order
-sort -nr | \ 
+# sort -nr ; sort (n) numerically (r) in reverse order
 
-# to print top 5 words
-head -n 5 
+# head -n 5 ; to print top 5 words
 
-# cat "$1" | \
-# tr -s '[:punct:][:space:]' '\n' | \
-# tr '[:upper:]' '[:lower:]' | \
-# grep -v '^$' | \
-# sort | uniq -c | sort -nr | head -n 5
+
+cat "$1" | tr -s '[:punct:][:space:]' '\n' | tr '[:upper:]' '[:lower:]' | grep -v '^$' | sort | uniq -c | sort -nr | head -n 5
+
+
+
+
 
 
 
