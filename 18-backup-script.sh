@@ -47,9 +47,10 @@ then
             echo "Deleting files: $filepath"
             rm -rf $filepath
         done <<< $FILES
+        echo -e "Log files older than $DAYS from $SOURCE_DIR directory removed...$G SUCCESS $N"
 
     else
-        echo "Failed to create Zip files"
+        echo -e "$R Failed to create Zip files $N"
         exit 1
     fi
 
