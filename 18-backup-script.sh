@@ -6,7 +6,7 @@ Y="\e[33m"
 N="\e[0m"
 SOURCE_DIR=$1
 DEST_DIR=$2
-DAYS=$(3:-14)
+DAYS=${3:-14}
 
 USAGE()
 {
@@ -19,13 +19,13 @@ then
     USAGE
 fi
 
-if [ ! -d SOURCE_DIR ]
+if [ ! -d $SOURCE_DIR ]
 then
     echo -e "$R Source Dir doesnot exist. Please check $N"
     exit 1
 fi
 
-if [ ! -d DEST_DIR ]
+if [ ! -d $DEST_DIR ]
 then
     echo -e "$R Destination Dir doesnot exist. Please check $N"
 fi
