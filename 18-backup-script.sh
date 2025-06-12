@@ -39,7 +39,7 @@ then
     echo "Files to zip are : $FILES"
     TIMESTAMP=$(date +%F-%H-%M-%S)
     ZIP_FILE="$DEST_DIR/app-logs-$TIMESTAMP.zip"
-    $FILES | zip -@ "$FILES"
+    $($FILES) | zip -@ "$FILES"
 
     if [ -f $ZIP_FILE ]
     then
