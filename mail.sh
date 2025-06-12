@@ -11,9 +11,9 @@ SUBJECT=$6
 FINAL_BODY=$(sed -e "s/TO_TEAM/$TO_TEAM/g" -e "s/ALERT_TYPE/$ALERT_TYPE/g" -e "s/IP_ADDRESS/$IP_ADDRESS/g" -e "s/MSG/$FINAL_MSG/g" template.html) 
 
 {
-echo "To: pkotholla@gmail.com"
-echo "Subject: Test Mail"
+echo "To: $TO_ADDRESS"
+echo "Subject: $SUBJECT"
 echo "Content-Type: text/html"
 echo ""
-echo "This is for testing purposes. Kindly ignore"
-} | msmtp "pkotholla@gmail.com"
+echo "$FINAL_BODY"
+} | msmtp "$TO_ADDRESS"
