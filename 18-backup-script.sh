@@ -5,13 +5,12 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 SOURCE_DIR=$1
-DESTINATION_DIR=$2
-DAYS=${3:-14}
-
+DEST_DIR=$2
+DAYS=$(3:-14)
 
 USAGE()
 {
-    echo -e "$R USAGE: $N sh 18-backup-script.sh <SOURCE_DIR> <DESTINATION_DIR> <DAYS(optional)>"
+    echo "$R USAGE $N sh 18-backup-script.sh <SOURCE_DIR> <DESTINATION_DIR> <DAYS(optional)>"
     exit 1
 }
 
@@ -20,44 +19,39 @@ then
     USAGE
 fi
 
-
-if [ ! -d "$SOURCE_DIR" ]
+if [ ! -d SOURCE_DIR ]
 then
-    echo -e "$R Source Directory does not exist. Please check $N"
+    echo -e "$R Source Dir doesnot exist. Please check $N"
     exit 1
 fi
 
-if [ ! -d "$DESTINATION_DIR" ]
+if [ ! -d DEST_DIR ]
 then
-    echo -e "$R Destination Directory does not exist. Please check $N"
-    exit 1
+    echo -e "$R Destination Dir doesnot exist. Please check $N"
 fi
 
 FILES=$(find $SOURCE_DIR -name "*.log" -mtime +$DAYS)
-sudo dnf install zip -y
 
-if [ ! -z "$FILES" ]
+if [ ! -z $FILES ]
 then
     echo "Files to zip are : $FILES"
     TIMESTAMP=$(date +%F-%H-%M-%S)
-    ZIP_FILE="$DESTINATION_DIR/app-logs-$TIMESTAMP.zip"
-    # find $SOURCE_DIR -name "*.log" -mtime +$DAYS | zip -@ "$ZIP_FILE"
-    echo "$FILES" | zip -@ "$ZIP_FILE"
+    ZIP_FILE="$DEST_DIR/app-logs-$TIMESTAMP.zip"
 
-    if [ -f "$ZIP_FILE" ]
+    if [ -f $ZIP_FILE ]
     then
-        echo "Successfully created zip file"
+        echo "Successfully created Zip files"
+
         while IFS= read -r filepath
         do
-            echo "Deleting file: $filepath" 
+            echo "Deleting files: $filepath"
             rm -rf $filepath
         done <<< $FILES
-        echo -e "Log files older than $DAYS from $SOURCE_DIR directory removed.. $G SUCCESS $N"
-     else
-        echo -e "Zip file creation...$R FAILURE $N"
+
+    else
+        echo "Failed to create Zip files"
         exit 1
     fi
-else
-    echo -e "No logs files older than 14 days... $Y SO SKIPPING $N"
-fi
 
+else
+    echo -e "No log files found older than 14 days.. $Y SO SKIPPING $N"
