@@ -1,5 +1,6 @@
 #!/bin/bash
 
-top -b -n 1 | grep "Cpu(s)" | awk '{print $2 + $4}'
 
-echo "top"
+cpu_usage=$(mpstat 1 1 | awk '/all/{print 100 - $NF}')
+
+echo "CPU Usage: ${cpu_usage}%"
