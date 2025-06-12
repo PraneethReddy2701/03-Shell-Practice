@@ -6,7 +6,7 @@ if [ $# -ne 1 ]; then
 fi
 
 # it prints the total content in the file (which we give as argument)
-cat $1 | \ 
+cat "$1" | \ 
 
 # tr replaces punctuations and spaces with new lines; -s removes repeated punctutation/space
 tr -s '[:punct:]' '[:space]' | \ 
